@@ -7,14 +7,10 @@ example (a b c : ℝ) : a * b * c = b * (a * c) := by
 
 -- Try these.
 example (a b c : ℝ) : c * b * a = b * (a * c) := by
-  rw [mul_comm c b]
-  rw [mul_assoc b c a]
-  rw [mul_comm c a]
+  sorry
 
 example (a b c : ℝ) : a * (b * c) = b * (a * c) := by
-  rw [← mul_assoc a b c]
-  rw [mul_comm a b]
-  rw [mul_assoc b a c]
+  sorry
 
 -- An example.
 example (a b c : ℝ) : a * b * c = b * c * a := by
@@ -24,15 +20,10 @@ example (a b c : ℝ) : a * b * c = b * c * a := by
 /- Try doing the first of these without providing any arguments at all,
    and the second with only one argument. -/
 example (a b c : ℝ) : a * (b * c) = b * (c * a) := by
-  rw [← mul_assoc]
-  rw [← mul_assoc]
-  rw [mul_assoc]
-  rw [mul_comm]
+  sorry
 
 example (a b c : ℝ) : a * (b * c) = b * (a * c) := by
-  rw [← mul_assoc]
-  rw [← mul_assoc]
-  rw [mul_comm b]
+  sorry
 
 -- Using facts from the local context.
 example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) : a * (b * e) = c * (d * f) := by
@@ -42,14 +33,10 @@ example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) : a * (b * e) = c *
   rw [mul_assoc]
 
 example (a b c d e f : ℝ) (h : b * c = e * f) : a * b * c * d = a * e * f * d := by
-  rw [mul_assoc a b c]
-  rw [h]
-  rw [← mul_assoc]
+  sorry
 
 example (a b c d : ℝ) (hyp : c = b * a - d) (hyp' : d = a * b) : c = 0 := by
-  rw [hyp, hyp']
-  rw [mul_comm b a]
-  rw [sub_self]
+  sorry
 
 example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) : a * (b * e) = c * (d * f) := by
   rw [h', ← mul_assoc, h, mul_assoc]
@@ -60,6 +47,7 @@ variable (a b c d e f : ℝ)
 
 example (h : a * b = c * d) (h' : e = f) : a * (b * e) = c * (d * f) := by
   rw [h', ← mul_assoc, h, mul_assoc]
+
 end
 
 section
@@ -96,11 +84,11 @@ example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
 example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
   calc
     (a + b) * (a + b) = a * a + b * a + (a * b + b * b) := by
-      rw [mul_add, add_mul, add_mul]
+      sorry
     _ = a * a + (b * a + a * b) + b * b := by
-      rw [← add_assoc, add_assoc (a * a)]
+      sorry
     _ = a * a + 2 * (a * b) + b * b := by
-      rw [mul_comm b a, ← two_mul]
+      sorry
 
 end
 
@@ -109,20 +97,10 @@ section
 variable (a b c d : ℝ)
 
 example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
-  calc
-    (a + b) * (c + d) = a * c + b * c + (a * d + b * d) := by
-      rw [mul_add, add_mul, add_mul]
-    _ = a * c + a * d + b * c + b * d := by
-      rw [add_assoc, ← add_assoc (b * c), add_comm (b * c), ← add_assoc (a * c), ← add_assoc (a * c)]
-end
-
+  sorry
 
 example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-  rw [pow_two, pow_two, mul_sub, add_mul, add_mul, add_sub_assoc, ← sub_sub (b * a), mul_comm (b), sub_self, ← add_sub_assoc, add_zero]
-
-
-section
-variable (a b c d : ℝ)
+  sorry
 
 #check pow_two a
 #check mul_sub a b c
@@ -131,7 +109,12 @@ variable (a b c d : ℝ)
 #check sub_sub a b c
 #check add_zero a
 
+end
+
 -- Examples.
+
+section
+variable (a b c d : ℝ)
 
 example (a b c d : ℝ) (hyp : c = d * a + b) (hyp' : b = a * d) : c = 2 * a * d := by
   rw [hyp'] at hyp
